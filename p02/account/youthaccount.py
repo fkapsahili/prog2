@@ -19,9 +19,9 @@ The use of the bank account should be simulated over time with a simulation scri
 to invoke the methods in a certain oder with variable time gaps in between. 
 """
 
-from bankaccount import BankAccount
+from account.bankaccount import BankAccount
+from account.utils import calculate_age
 from datetime import datetime
-from utils import calculate_age
 
 
 class Birthday:
@@ -40,8 +40,8 @@ class Birthday:
 class YouthAccount(BankAccount):
     __birthday = Birthday()
 
-    def __init__(self, birthday, currency="CHF"):
-        super().__init__(currency, interest_rate=0.02)
+    def __init__(self, birthday, currency="CHF", name=None, initial_balance=0):
+        super().__init__(currency, interest_rate=0.02, name=name, balance=initial_balance)
         self.__birthday = birthday
         self.__withdraw_limit_monthly = 2000
         self.__withdraw_counter = 0

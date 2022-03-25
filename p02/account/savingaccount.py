@@ -23,13 +23,13 @@ The use of the bank account should be simulated over time with a simulation scri
 to invoke the methods in a certain oder with variable time gaps in between. 
 """
 
-from bankaccount import BankAccount
+from account.bankaccount import BankAccount
 from datetime import datetime
 
 
 class SavingAccount(BankAccount):
-    def __init__(self, currency="CHF"):
-        super().__init__(currency, interest_rate=0.001)
+    def __init__(self, currency="CHF", name=None, initial_balance=0):
+        super().__init__(currency, interest_rate=0.001, name=name, balance=initial_balance)
 
     def get_balance(self):
         self.__add_interest()

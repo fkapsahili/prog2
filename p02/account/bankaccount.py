@@ -48,14 +48,15 @@ class CurrencyCode:
 class BankAccount:
     __currency = CurrencyCode()
 
-    def __init__(self, currency="CHF", balance=0, interest_rate=0.0):
+    def __init__(self, currency="CHF", balance=0, interest_rate=0.0, name=None):
         self.__account_number = self.__generate_account_number()
         self.__currency = currency
-        self.__balance = balance
+        self.__balance = int(balance)
         self.__is_closed = False
         self.__created_at = datetime.now()
         self.__updated_at = datetime.now()
         self.__interest_rate = interest_rate
+        self.__name = name
 
     def open(self):
         if self.__is_closed:
@@ -86,6 +87,9 @@ class BankAccount:
         else:
             self.__balance -= amount
             self.set_updated_at()
+
+    def get_name(self):
+        return self.__name
 
     def get_is_closed(self):
         return self.__is_closed

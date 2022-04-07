@@ -22,9 +22,10 @@ The bank application should be an interactive application. The user should be ab
 The application should store the accounts and should use an attribute current_account to store the currently
 selected account.
 
-How to use the bank application:
+!!! How to use the bank application !!!
 - Make sure you have an account signed up.
 - Also make sure you are logged in. Only authenticated users are able to access most parts of the bank application.
+- run the main.py script to start the application.
 """
 
 from account.youthaccount import YouthAccount

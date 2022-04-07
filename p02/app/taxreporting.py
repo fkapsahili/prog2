@@ -19,6 +19,16 @@ The format should be similiar to the following:
     ** Total ** 40000.00 Fr
 """
 
+"""
+P03 1.2 "Data use"
+
+The application should be completed with a currency conversion if the currency is not CHF.
+Therefore the currency conversion should be done in the TaxReport class.
+The module currency_converter.py should be imported.
+"""
+
+from account.currency_converter import get_rate
+
 
 class TaxReport:
     def __init__(self, bank_application):
@@ -31,13 +41,21 @@ class TaxReport:
         return total
 
     def generate(self):
+
         print(
             "Tax report 2022 for fiscal year 2021".format(
                 self.__bank_application.get_fiscal_year(), self.__bank_application.get_fiscal_year() - 1
             )
         )
         for account in self.__bank_application.get_accounts():
-            print(
-                "** {} Account ** {} {}".format(account.__class__.__name__, account.get_name(), account.get_balance())
-            )
+            # convert the balance to CHF
+            if account.get_currency() != "CHF":
+                rate = get_rate(account.get_currency())
+                if rate is not None:
+                    balance = account.get_balance() * rate["result"]
+                else:
+                    balance = account.get_balance()
+
+            print("** {} Account ** {} {} CHF".format(account.__class__.__name__, account.get_name(), balance))
+
         print("** Total ** {} Fr".format(self.__get_total_wealth(self.__bank_application.get_accounts())))
